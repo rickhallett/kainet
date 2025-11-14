@@ -39,8 +39,14 @@ iex "& { $(irm https://raw.githubusercontent.com/rickhallett/kainet/main/install
 **what happens:**
 - detects your OS and architecture
 - downloads the correct binary
+- installs to `~/.local/bin/kainet` (macOS/Linux) or `%LOCALAPPDATA%\kainet\` (Windows)
 - handles permissions and quarantine
-- launches the terminal automatically
+- provides command to launch the terminal
+
+**to run again:**
+```bash
+~/.local/bin/kainet <username> <room-name>
+```
 
 **room names:**
 - acts as a shared secret
