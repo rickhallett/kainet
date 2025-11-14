@@ -1,0 +1,21 @@
+# Binaries
+kainet
+kainet-*
+*.exe
+
+# Build directory
+bin/
+
+# Environment files
+.env
+.env.local
+
+# macOS
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~

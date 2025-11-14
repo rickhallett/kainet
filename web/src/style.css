@@ -1,0 +1,497 @@
+/* kaiNET - Retro CRT Terminal Aesthetic with Mobile Responsive Design */
+
+:root {
+    --terminal-green: #00ff00;
+    --terminal-bg: #000000;
+    --terminal-glow: rgba(0, 255, 0, 0.5);
+    --terminal-cyan: #00ffff;
+    --terminal-yellow: #ffff00;
+    --terminal-red: #ff0000;
+    --scan-line-color: rgba(0, 255, 0, 0.05);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Courier New', Courier, monospace;
+    background-color: var(--terminal-bg);
+    color: var(--terminal-green);
+    overflow: hidden;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+}
+
+/* CRT Screen Effect - Desktop Only */
+@media (min-width: 769px) {
+    body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: repeating-linear-gradient(
+            0deg,
+            var(--scan-line-color) 0px,
+            transparent 1px,
+            transparent 2px,
+            var(--scan-line-color) 3px
+        );
+        pointer-events: none;
+        z-index: 9999;
+        animation: scanlines 8s linear infinite;
+    }
+
+    @keyframes scanlines {
+        0% { transform: translateY(0); }
+        100% { transform: translateY(10px); }
+    }
+}
+
+/* Screen Container */
+.screen {
+    display: none;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.screen.active {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Login Screen */
+.login-container {
+    text-align: center;
+    padding: 20px;
+    width: 100%;
+    max-width: 600px;
+}
+
+.banner {
+    color: var(--terminal-green);
+    text-shadow: 0 0 10px var(--terminal-glow);
+    margin-bottom: 30px;
+    font-size: 10px;
+    line-height: 1.2;
+    white-space: pre;
+    overflow-x: auto;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+    max-width: 300px;
+}
+
+.input-group label {
+    text-align: left;
+    font-size: 14px;
+    text-shadow: 0 0 5px var(--terminal-glow);
+    letter-spacing: 2px;
+}
+
+input {
+    background-color: rgba(0, 0, 0, 0.8);
+    border: 2px solid var(--terminal-green);
+    color: var(--terminal-green);
+    padding: 12px 15px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 16px;
+    text-shadow: 0 0 5px var(--terminal-glow);
+    outline: none;
+    width: 100%;
+    min-height: 44px; /* Touch-friendly */
+}
+
+input:focus {
+    box-shadow: 0 0 15px var(--terminal-glow);
+    border-color: var(--terminal-cyan);
+}
+
+.connect-btn, .burn-btn, .disconnect-btn {
+    background-color: rgba(0, 255, 0, 0.1);
+    border: 2px solid var(--terminal-green);
+    color: var(--terminal-green);
+    padding: 12px 30px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 16px;
+    cursor: pointer;
+    text-shadow: 0 0 5px var(--terminal-glow);
+    transition: all 0.3s;
+    letter-spacing: 2px;
+    min-height: 44px; /* Touch-friendly */
+    min-width: 120px;
+}
+
+.connect-btn:hover, .burn-btn:hover, .disconnect-btn:hover {
+    background-color: rgba(0, 255, 0, 0.3);
+    box-shadow: 0 0 20px var(--terminal-glow);
+}
+
+.connect-btn:active, .burn-btn:active, .disconnect-btn:active {
+    transform: scale(0.98);
+}
+
+/* Chat Screen */
+.chat-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+}
+
+.chat-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    border: 2px solid var(--terminal-green);
+    background-color: rgba(0, 255, 0, 0.05);
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.header-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.username-display {
+    color: var(--terminal-cyan);
+    text-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
+    font-weight: bold;
+}
+
+.room-display {
+    color: var(--terminal-yellow);
+    text-shadow: 0 0 5px rgba(255, 255, 0, 0.5);
+    font-weight: bold;
+}
+
+.separator {
+    color: var(--terminal-green);
+}
+
+.header-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.burn-btn {
+    border-color: var(--terminal-red);
+    color: var(--terminal-red);
+    padding: 8px 15px;
+    font-size: 12px;
+    min-height: 36px;
+}
+
+.burn-btn:hover {
+    background-color: rgba(255, 0, 0, 0.2);
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.5);
+}
+
+.disconnect-btn {
+    padding: 8px 15px;
+    font-size: 12px;
+    min-height: 36px;
+}
+
+/* Boot Sequence */
+.boot-sequence {
+    display: none;
+    padding: 20px;
+    border: 2px solid var(--terminal-green);
+    background-color: rgba(0, 0, 0, 0.9);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    min-width: 300px;
+}
+
+.boot-line {
+    opacity: 0;
+    transition: opacity 0.3s;
+    margin: 10px 0;
+    text-shadow: 0 0 5px var(--terminal-glow);
+}
+
+.boot-ready {
+    color: var(--terminal-cyan);
+    text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+    font-weight: bold;
+}
+
+/* Messages Container */
+.messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 15px;
+    border: 2px solid var(--terminal-green);
+    background-color: rgba(0, 0, 0, 0.5);
+    margin-bottom: 15px;
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+}
+
+.message {
+    margin: 8px 0;
+    line-height: 1.6;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.timestamp {
+    color: var(--terminal-green);
+    opacity: 0.7;
+    margin-right: 8px;
+    font-size: 12px;
+}
+
+.username-self {
+    color: var(--terminal-cyan);
+    text-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+.username-other {
+    color: var(--terminal-yellow);
+    text-shadow: 0 0 5px rgba(255, 255, 0, 0.5);
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+.message-text {
+    color: var(--terminal-green);
+}
+
+.system-message {
+    color: var(--terminal-green);
+    font-style: italic;
+    opacity: 0.8;
+}
+
+.system-error {
+    color: var(--terminal-red);
+    text-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+}
+
+.system-burn {
+    color: var(--terminal-red);
+    text-shadow: 0 0 10px rgba(255, 0, 0, 0.7);
+    font-weight: bold;
+}
+
+/* Input Container */
+.input-container {
+    display: flex;
+    gap: 10px;
+}
+
+#message-input {
+    flex: 1;
+}
+
+/* Scrollbar Styling */
+.messages::-webkit-scrollbar {
+    width: 10px;
+}
+
+.messages::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.messages::-webkit-scrollbar-thumb {
+    background: var(--terminal-green);
+    box-shadow: 0 0 5px var(--terminal-glow);
+}
+
+.messages::-webkit-scrollbar-thumb:hover {
+    background: var(--terminal-cyan);
+}
+
+/* Mobile Responsive Styles */
+@media (max-width: 768px) {
+    /* Adjust banner for mobile */
+    .banner {
+        font-size: 6px;
+        margin-bottom: 20px;
+    }
+
+    /* Make login form mobile-friendly */
+    .login-container {
+        padding: 15px;
+    }
+
+    .input-group {
+        max-width: 100%;
+    }
+
+    .input-group label {
+        font-size: 12px;
+        letter-spacing: 1px;
+    }
+
+    input {
+        font-size: 16px; /* Prevent iOS zoom on focus */
+        padding: 14px 12px;
+    }
+
+    /* Chat screen optimizations */
+    .chat-container {
+        padding: 10px;
+    }
+
+    .chat-header {
+        padding: 10px;
+        font-size: 12px;
+    }
+
+    .header-info {
+        font-size: 12px;
+    }
+
+    .header-actions {
+        width: 100%;
+        justify-content: flex-end;
+    }
+
+    .burn-btn, .disconnect-btn {
+        font-size: 10px;
+        padding: 8px 12px;
+        min-height: 40px;
+    }
+
+    /* Messages area */
+    .messages {
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    .message {
+        margin: 10px 0;
+    }
+
+    .timestamp {
+        font-size: 10px;
+        display: block;
+        margin-bottom: 2px;
+    }
+
+    .username-self, .username-other {
+        font-size: 13px;
+    }
+
+    .message-text {
+        font-size: 14px;
+    }
+
+    /* Input container */
+    .input-container {
+        margin-bottom: env(safe-area-inset-bottom, 0px); /* iOS safe area */
+    }
+
+    #message-input {
+        font-size: 16px; /* Prevent iOS zoom */
+        padding: 14px 12px;
+    }
+
+    /* Boot sequence */
+    .boot-sequence {
+        width: 90%;
+        min-width: unset;
+        padding: 15px;
+        font-size: 12px;
+    }
+
+    .boot-line {
+        margin: 8px 0;
+    }
+
+    /* Simplify scrollbar on mobile */
+    .messages::-webkit-scrollbar {
+        width: 6px;
+    }
+}
+
+/* Small mobile devices */
+@media (max-width: 480px) {
+    .banner {
+        font-size: 5px;
+    }
+
+    .chat-header {
+        font-size: 11px;
+    }
+
+    .messages {
+        font-size: 13px;
+    }
+
+    .burn-btn, .disconnect-btn {
+        font-size: 9px;
+        padding: 6px 10px;
+    }
+}
+
+/* Landscape mobile optimizations */
+@media (max-width: 768px) and (orientation: landscape) {
+    .chat-container {
+        padding: 5px;
+    }
+
+    .chat-header {
+        padding: 8px;
+        margin-bottom: 5px;
+    }
+
+    .messages {
+        padding: 8px;
+        margin-bottom: 5px;
+    }
+
+    .banner {
+        font-size: 5px;
+        margin-bottom: 15px;
+    }
+}
+
+/* Prevent text selection on buttons (better mobile UX) */
+button {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+/* Better touch targets for all interactive elements */
+@media (hover: none) and (pointer: coarse) {
+    button, input {
+        min-height: 44px;
+    }
+}

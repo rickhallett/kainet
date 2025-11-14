@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <title>kaiNET - Encrypted Terminal Chat</title>
+    <link rel="stylesheet" href="/src/style.css">
+</head>
+<body>
+    <div id="login-screen" class="screen active">
+        <div class="login-container">
+            <pre class="banner">
+    ██╗  ██╗ █████╗ ██╗███╗   ██╗███████╗████████╗
+    ██║ ██╔╝██╔══██╗██║████╗  ██║██╔════╝╚══██╔══╝
+    █████╔╝ ███████║██║██╔██╗ ██║█████╗     ██║
+    ██╔═██╗ ██╔══██║██║██║╚██╗██║██╔══╝     ██║
+    ██║  ██╗██║  ██║██║██║ ╚████║███████╗   ██║
+    ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝╚═╝  ╚═══╝╚══════╝   ╚═╝
+            </pre>
+            <div class="login-form">
+                <div class="input-group">
+                    <label for="username">USERNAME:</label>
+                    <input type="text" id="username" autocomplete="off" spellcheck="false" maxlength="20">
+                </div>
+                <div class="input-group">
+                    <label for="roomname">ROOM NAME:</label>
+                    <input type="text" id="roomname" autocomplete="off" spellcheck="false" maxlength="20">
+                </div>
+                <button id="connect-btn" class="connect-btn">CONNECT</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="chat-screen" class="screen">
+        <div class="chat-container">
+            <div class="chat-header">
+                <div class="header-info">
+                    <span id="current-username" class="username-display"></span>
+                    <span class="separator">@</span>
+                    <span id="current-room" class="room-display"></span>
+                </div>
+                <div class="header-actions">
+                    <button id="burn-btn" class="burn-btn" title="Wipe room history">/BURN</button>
+                    <button id="disconnect-btn" class="disconnect-btn" title="Disconnect">DISCONNECT</button>
+                </div>
+            </div>
+
+            <div id="boot-sequence" class="boot-sequence">
+                <div class="boot-line">[SYSTEM] Initializing secure connection...</div>
+                <div class="boot-line">[CRYPTO] Loading AES-256-GCM encryption...</div>
+                <div class="boot-line">[DATABASE] Connecting to Turso libSQL...</div>
+                <div class="boot-line">[NETWORK] Establishing encrypted channel...</div>
+                <div class="boot-line boot-ready">[READY] kaiNET operational</div>
+            </div>
+
+            <div id="messages" class="messages"></div>
+
+            <div class="input-container">
+                <input type="text" id="message-input" placeholder="Type message and press Enter..." autocomplete="off" spellcheck="false">
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="/src/main.js"></script>
+</body>
+</html>

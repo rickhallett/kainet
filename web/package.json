@@ -1,0 +1,24 @@
+{
+  "name": "kainet-web",
+  "version": "1.0.0",
+  "description": "kaiNET - Encrypted Terminal Chat Web Client",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "keywords": [
+    "chat",
+    "encryption",
+    "terminal",
+    "e2e",
+    "turso",
+    "libsql"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "vite": "^5.0.0"
+  }
+}
