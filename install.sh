@@ -120,22 +120,16 @@ cp "$BINARY_NAME" "$FINAL_PATH"
 chmod +x "$FINAL_PATH"
 echo -e "${GREEN}>>> installed to $FINAL_PATH${NC}"
 
-# Try to launch with stdin redirect, or show instructions
+# Launch the binary
+# When piped (curl | bash), spawn in new bash to restore stdin
 if [ -t 0 ]; then
     # Running in interactive terminal, launch directly
     echo -e "${GREEN}║  LAUNCHING SECURE TERMINAL...          ║${NC}"
     echo ""
     exec "$FINAL_PATH" "$USERNAME" "$ROOM_NAME"
 else
-    # Piped input, provide instructions
-    echo -e "${YELLOW}═══════════════════════════════════════════════════════════${NC}"
-    echo -e "${CYAN}To start the secure terminal, run:${NC}"
+    # Piped input, launch in new bash session with proper stdin
+    echo -e "${GREEN}║  LAUNCHING SECURE TERMINAL...          ║${NC}"
     echo ""
-    echo -e "${GREEN}  $FINAL_PATH $USERNAME $ROOM_NAME${NC}"
-    echo ""
-    echo -e "${CYAN}Or add to your PATH and run:${NC}"
-    echo -e "${GREEN}  export PATH=\"\$HOME/.local/bin:\$PATH\"${NC}"
-    echo -e "${GREEN}  $BINARY_NAME $USERNAME $ROOM_NAME${NC}"
-    echo ""
-    echo -e "${YELLOW}═══════════════════════════════════════════════════════════${NC}"
+    exec bash -c "exec '$FINAL_PATH' '$USERNAME' '$ROOM_NAME' < /dev/tty"
 fi
