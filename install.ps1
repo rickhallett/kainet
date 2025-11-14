@@ -9,8 +9,8 @@ param(
 )
 
 # Configuration
-$BinaryHost = if ($env:BT_PHONE_HOME_HOST) { $env:BT_PHONE_HOME_HOST } else { "https://raw.githubusercontent.com/YOUR_USERNAME/bt-phone-home/main/bin" }
-$BinaryName = "bt-phone-home.exe"
+$BinaryHost = if ($env:KAINET_HOST) { $env:KAINET_HOST } else { "https://github.com/rickhallett/kainet/releases/download/v1.1.0" }
+$BinaryName = "kainet.exe"
 
 # Colors
 function Write-Green { param($text) Write-Host $text -ForegroundColor Green }

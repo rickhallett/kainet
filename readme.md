@@ -20,12 +20,12 @@ ultra-lightweight private chat for 2 people using turso database.
 **one-line install and run:**
 
 ```bash
-curl -fsSL https://your-host.com/install.sh | bash -s -- <username> <room-name>
+curl -fsSL https://raw.githubusercontent.com/rickhallett/kainet/main/install.sh | bash -s -- <username> <room-name>
 ```
 
 **example:**
 ```bash
-curl -fsSL https://your-host.com/install.sh | bash -s -- alice secret-room
+curl -fsSL https://raw.githubusercontent.com/rickhallett/kainet/main/install.sh | bash -s -- alice secret-room
 ```
 
 ### Windows
@@ -33,8 +33,7 @@ curl -fsSL https://your-host.com/install.sh | bash -s -- alice secret-room
 **PowerShell install:**
 
 ```powershell
-irm https://your-host.com/install.ps1 | iex
-Install-BtPhoneHome -Username alice -RoomName secret-room
+iex "& { $(irm https://raw.githubusercontent.com/rickhallett/kainet/main/install.ps1) } alice secret-room"
 ```
 
 **what happens:**
@@ -50,6 +49,26 @@ Install-BtPhoneHome -Username alice -RoomName secret-room
 - use different rooms for different groups
 
 see [HOSTING.md](HOSTING.md) for binary hosting setup.
+
+## direct download
+
+**latest release:** https://github.com/rickhallett/kainet/releases/latest
+
+download pre-built binaries:
+- [macOS Apple Silicon (M1/M2/M3)](https://github.com/rickhallett/kainet/releases/download/v1.1.0/kainet-darwin-arm64)
+- [macOS Intel](https://github.com/rickhallett/kainet/releases/download/v1.1.0/kainet-darwin-amd64)
+- [Linux (amd64)](https://github.com/rickhallett/kainet/releases/download/v1.1.0/kainet-linux-amd64)
+- [Windows (64-bit)](https://github.com/rickhallett/kainet/releases/download/v1.1.0/kainet.exe)
+
+after downloading, make executable and run:
+```bash
+# macOS/Linux
+chmod +x kainet-*
+./kainet-darwin-arm64 <username> <room-name>
+
+# Windows
+.\kainet.exe <username> <room-name>
+```
 
 ## manual setup
 
@@ -200,19 +219,22 @@ send them the binary. no separate credentials file needed.
 
 ## web version
 
-a browser-based terminal version is available in the `web/` directory:
+**try it now:** https://web-byjukk5lm-rick-halletts-projects.vercel.app
 
-```bash
-cd web
-bun install
-bun run dev
-```
+a browser-based terminal version is available:
 
 features:
 - retro CRT terminal with scanlines
 - same encryption as CLI
 - works in any browser
-- can be deployed to vercel/netlify/cloudflare
+- deployed on Vercel
+
+**local development:**
+```bash
+cd web
+bun install
+bun run dev
+```
 
 see `web/README.md` for details.
 

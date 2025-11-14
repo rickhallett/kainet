@@ -10,8 +10,8 @@ YELLOW='\033[1;33m'
 NC='\033[0m' # No Color
 
 # Configuration
-BINARY_HOST="${BT_PHONE_HOME_HOST:-https://raw.githubusercontent.com/YOUR_USERNAME/bt-phone-home/main/bin}"
-BINARY_NAME="bt-phone-home"
+BINARY_HOST="${KAINET_HOST:-https://github.com/rickhallett/kainet/releases/download/v1.1.0}"
+BINARY_NAME="kainet"
 
 # Parse arguments
 USERNAME="$1"
@@ -53,7 +53,7 @@ case "$OS" in
         echo -e "${RED}Windows detected - please use PowerShell installer${NC}"
         echo "Run this command in PowerShell instead:"
         echo ""
-        echo "  irm https://your-host.com/install.ps1 | iex; Install-BtPhoneHome -Username \"$USERNAME\" -RoomName \"$ROOM_NAME\""
+        echo "  iex \"& { \$(irm https://raw.githubusercontent.com/rickhallett/kainet/main/install.ps1) } $USERNAME $ROOM_NAME\""
         echo ""
         exit 1
         ;;
