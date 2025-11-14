@@ -4,3 +4,4 @@ bt-phone-home.exe
 bin/
 .env
 *.exe
+.vercel
