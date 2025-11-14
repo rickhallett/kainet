@@ -62,9 +62,28 @@ Write-Green ">>> unblocked file"
 Write-Host ""
 Write-Green "╔════════════════════════════════════════╗"
 Write-Green "║  INSTALLATION COMPLETE                 ║"
-Write-Green "║  LAUNCHING SECURE TERMINAL...          ║"
 Write-Green "╚════════════════════════════════════════╝"
 Write-Host ""
 
-# Execute binary
-& ".\$BinaryName" $Username $RoomName
+# Copy binary to permanent location
+$InstallDir = "$env:LOCALAPPDATA\kainet"
+if (-not (Test-Path $InstallDir)) {
+    New-Item -ItemType Directory -Path $InstallDir -Force | Out-Null
+}
+$FinalPath = Join-Path $InstallDir $BinaryName
+
+Copy-Item $BinaryName -Destination $FinalPath -Force
+Write-Green ">>> installed to $FinalPath"
+Write-Host ""
+
+# Provide instructions
+Write-Yellow "═══════════════════════════════════════════════════════════"
+Write-Cyan "To start the secure terminal, run:"
+Write-Host ""
+Write-Green "  & `"$FinalPath`" $Username $RoomName"
+Write-Host ""
+Write-Cyan "Or add to your PATH for easy access:"
+Write-Green "  `$env:PATH += `";$InstallDir`""
+Write-Green "  $($BinaryName -replace '\.exe$','') $Username $RoomName"
+Write-Host ""
+Write-Yellow "═══════════════════════════════════════════════════════════"

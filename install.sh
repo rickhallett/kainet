@@ -65,6 +65,9 @@ case "$OS" in
         ;;
 esac
 
+# Save original directory
+ORIGINAL_DIR="$PWD"
+
 # Create temp directory
 TEMP_DIR=$(mktemp -d)
 cd "$TEMP_DIR"
@@ -105,10 +108,34 @@ fi
 echo ""
 echo -e "${GREEN}╔════════════════════════════════════════╗${NC}"
 echo -e "${GREEN}║  INSTALLATION COMPLETE                 ║${NC}"
-echo -e "${GREEN}║  LAUNCHING SECURE TERMINAL...          ║${NC}"
 echo -e "${GREEN}╚════════════════════════════════════════╝${NC}"
 echo ""
 
-# Execute binary with username and room
-# Redirect stdin from terminal to handle pipe-to-bash installation
-exec "./$BINARY_NAME" "$USERNAME" "$ROOM_NAME" < /dev/tty
+# Copy binary to permanent location
+INSTALL_DIR="$HOME/.local/bin"
+mkdir -p "$INSTALL_DIR"
+FINAL_PATH="$INSTALL_DIR/$BINARY_NAME"
+
+cp "$BINARY_NAME" "$FINAL_PATH"
+chmod +x "$FINAL_PATH"
+echo -e "${GREEN}>>> installed to $FINAL_PATH${NC}"
+
+# Try to launch with stdin redirect, or show instructions
+if [ -t 0 ]; then
+    # Running in interactive terminal, launch directly
+    echo -e "${GREEN}║  LAUNCHING SECURE TERMINAL...          ║${NC}"
+    echo ""
+    exec "$FINAL_PATH" "$USERNAME" "$ROOM_NAME"
+else
+    # Piped input, provide instructions
+    echo -e "${YELLOW}═══════════════════════════════════════════════════════════${NC}"
+    echo -e "${CYAN}To start the secure terminal, run:${NC}"
+    echo ""
+    echo -e "${GREEN}  $FINAL_PATH $USERNAME $ROOM_NAME${NC}"
+    echo ""
+    echo -e "${CYAN}Or add to your PATH and run:${NC}"
+    echo -e "${GREEN}  export PATH=\"\$HOME/.local/bin:\$PATH\"${NC}"
+    echo -e "${GREEN}  $BINARY_NAME $USERNAME $ROOM_NAME${NC}"
+    echo ""
+    echo -e "${YELLOW}═══════════════════════════════════════════════════════════${NC}"
+fi
