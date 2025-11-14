@@ -9,7 +9,7 @@ param(
 )
 
 # Configuration
-$BinaryHost = if ($env:KAINET_HOST) { $env:KAINET_HOST } else { "https://github.com/rickhallett/kainet/releases/download/v1.1.0" }
+$BinaryHost = if ($env:KAINET_HOST) { $env:KAINET_HOST } else { "https://github.com/rickhallett/kainet/releases/download/v1.2.0" }
 $BinaryName = "kainet.exe"
 
 # Colors

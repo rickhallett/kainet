@@ -66,10 +66,10 @@ see [HOSTING.md](HOSTING.md) for binary hosting setup.
 **latest release:** https://github.com/rickhallett/kainet/releases/latest
 
 download pre-built binaries:
-- [macOS Apple Silicon (M1/M2/M3)](https://github.com/rickhallett/kainet/releases/download/v1.1.0/kainet-darwin-arm64)
-- [macOS Intel](https://github.com/rickhallett/kainet/releases/download/v1.1.0/kainet-darwin-amd64)
-- [Linux (amd64)](https://github.com/rickhallett/kainet/releases/download/v1.1.0/kainet-linux-amd64)
-- [Windows (64-bit)](https://github.com/rickhallett/kainet/releases/download/v1.1.0/kainet.exe)
+- [macOS Apple Silicon (M1/M2/M3)](https://github.com/rickhallett/kainet/releases/download/v1.2.0/kainet-darwin-arm64)
+- [macOS Intel](https://github.com/rickhallett/kainet/releases/download/v1.2.0/kainet-darwin-amd64)
+- [Linux (amd64)](https://github.com/rickhallett/kainet/releases/download/v1.2.0/kainet-linux-amd64)
+- [Windows (64-bit)](https://github.com/rickhallett/kainet/releases/download/v1.2.0/kainet.exe)
 
 after downloading, make executable and run:
 ```bash

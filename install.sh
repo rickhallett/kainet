@@ -10,7 +10,7 @@ YELLOW='\033[1;33m'
 NC='\033[0m' # No Color
 
 # Configuration
-BINARY_HOST="${KAINET_HOST:-https://github.com/rickhallett/kainet/releases/download/v1.1.0}"
+BINARY_HOST="${KAINET_HOST:-https://github.com/rickhallett/kainet/releases/download/v1.2.0}"
 BINARY_NAME="kainet"
 
 # Parse arguments
