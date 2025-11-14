@@ -99,7 +99,7 @@ func main() {
 	green.Printf("║  ENCRYPTION: AES-256-GCM               ║\n")
 	green.Println("╚════════════════════════════════════════╗")
 	fmt.Println()
-	dim.Println("commands: /burn (wipe history)")
+	dim.Println("commands: /burn (wipe history), /exit (close terminal)")
 	fmt.Println()
 
 	// Display recent history
@@ -402,6 +402,29 @@ func handleCommand(db *sql.DB, cmd string, lastID *int64, username, roomName str
 		green.Println(" PURGED")
 		dim.Println("all message history for this room has been permanently erased")
 		*lastID = 0
+		return nil
+	case "/exit":
+		yellow.Print("confirm terminal shutdown? (yes/no): ")
+		scanner := bufio.NewScanner(os.Stdin)
+		if scanner.Scan() {
+			response := strings.ToLower(strings.TrimSpace(scanner.Text()))
+			if response == "yes" || response == "y" {
+				fmt.Println()
+				green.Println(">>> disconnecting secure channel...")
+				time.Sleep(300 * time.Millisecond)
+				green.Println(">>> clearing encryption keys...")
+				time.Sleep(300 * time.Millisecond)
+				green.Println(">>> closing connection...")
+				time.Sleep(300 * time.Millisecond)
+				fmt.Println()
+				green.Println("SECURE TERMINAL CLOSED")
+				fmt.Println()
+				os.Exit(0)
+			} else {
+				dim.Println("shutdown cancelled")
+				return nil
+			}
+		}
 		return nil
 	default:
 		return fmt.Errorf("unknown command: %s", cmd)
