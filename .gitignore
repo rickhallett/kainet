@@ -1,0 +1,6 @@
+bt-phone-home
+bt-phone-home-*
+bt-phone-home.exe
+bin/
+.env
+*.exe
