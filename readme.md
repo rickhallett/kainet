@@ -1,4 +1,4 @@
-# bt-phone-home
+# kainet
 
 ultra-lightweight private chat for 2 people using turso database.
 
