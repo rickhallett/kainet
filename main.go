@@ -256,7 +256,7 @@ func bootSequence(username, roomName string) {
 		"loading security protocols",
 		"verifying operator credentials",
 		fmt.Sprintf("connecting to room: %s", roomName),
-		"establishing quantum-resistant handshake",
+		"establishing secure handshake",
 		"activating end-to-end encryption",
 	}
 

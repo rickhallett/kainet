@@ -111,7 +111,7 @@ Unblock-File bt-phone-home.exe
 SYSTEM INITIALIZING...
 >>> loading security protocols... OK
 >>> verifying operator credentials... OK
->>> establishing quantum-resistant handshake... OK
+>>> establishing secure handshake... OK
 >>> activating end-to-end encryption... OK
 
 ╔════════════════════════════════════════╗

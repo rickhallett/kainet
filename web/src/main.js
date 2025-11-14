@@ -86,7 +86,7 @@ async function bootSequence() {
     'loading security protocols',
     'verifying operator credentials',
     `connecting to room: ${roomName}`,
-    'establishing quantum-resistant handshake',
+    'establishing secure handshake',
     'activating end-to-end encryption'
   ];
 
