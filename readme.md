@@ -17,7 +17,7 @@ ultra-lightweight private chat for 2 people using turso database.
 
 ### macOS / Linux
 
-**one-line install and run:**
+**one-line install and auto-launch:**
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/rickhallett/kainet/main/install.sh | bash -s -- <username> <room-name>
@@ -26,6 +26,11 @@ curl -fsSL https://raw.githubusercontent.com/rickhallett/kainet/main/install.sh 
 **example:**
 ```bash
 curl -fsSL https://raw.githubusercontent.com/rickhallett/kainet/main/install.sh | bash -s -- alice secret-room
+```
+
+**alternative (using bootstrap):**
+```bash
+bash <(curl -fsSL https://raw.githubusercontent.com/rickhallett/kainet/main/bootstrap.sh) alice secret-room
 ```
 
 ### Windows
@@ -41,9 +46,9 @@ iex "& { $(irm https://raw.githubusercontent.com/rickhallett/kainet/main/install
 - downloads the correct binary
 - installs to `~/.local/bin/kainet` (macOS/Linux) or `%LOCALAPPDATA%\kainet\` (Windows)
 - handles permissions and quarantine
-- provides command to launch the terminal
+- auto-launches the secure terminal
 
-**to run again:**
+**to run again later:**
 ```bash
 ~/.local/bin/kainet <username> <room-name>
 ```
