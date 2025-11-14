@@ -110,4 +110,5 @@ echo -e "${GREEN}╚════════════════════
 echo ""
 
 # Execute binary with username and room
-exec "./$BINARY_NAME" "$USERNAME" "$ROOM_NAME"
+# Redirect stdin from terminal to handle pipe-to-bash installation
+exec "./$BINARY_NAME" "$USERNAME" "$ROOM_NAME" < /dev/tty
